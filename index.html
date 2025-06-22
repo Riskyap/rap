@@ -33,6 +33,7 @@
       padding: 10px;
       text-align: center;
       transition: transform 0.2s;
+      position: relative;
     }
     .movie-card:hover {
       transform: scale(1.05);
@@ -50,6 +51,22 @@
     .movie-year {
       color: #bbb;
       font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .play-button {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .play-button:hover {
+      background: #ff1f1f;
     }
     .ads {
       margin: 10px auto;
@@ -58,7 +75,7 @@
   </style>
 </head>
 <body>
-  <!-- Iklan -->
+  <!-- Iklan atas -->
   <div class="ads">
     <script type="text/javascript" src="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa"></script>
   </div>
@@ -71,6 +88,7 @@
 
   <script>
     const apiURL = "https://www.omdbapi.com/?s=batman&apikey=e1c61238"; // HTTPS FIXED
+    const redirectLink = "https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa";
 
     async function fetchMovies() {
       const container = document.getElementById("movies-container");
@@ -85,12 +103,14 @@
 
         container.innerHTML = ""; // Kosongkan loading
         data.Search.forEach(movie => {
+          const poster = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/180x270?text=No+Image";
           const card = document.createElement("div");
           card.className = "movie-card";
           card.innerHTML = `
-            <img src="${movie.Poster !== "N/A" ? movie.Poster : 'https://via.placeholder.com/180x270?text=No+Image'}" alt="${movie.Title}">
+            <img src="${poster}" alt="${movie.Title}">
             <div class="movie-title">${movie.Title}</div>
             <div class="movie-year">${movie.Year}</div>
+            <a href="${redirectLink}" class="play-button" target="_blank" rel="noopener noreferrer">Play</a>
           `;
           container.appendChild(card);
         });
