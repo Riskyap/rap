@@ -33,7 +33,6 @@
       padding: 10px;
       text-align: center;
       transition: transform 0.2s;
-      position: relative;
     }
     .movie-card:hover {
       transform: scale(1.05);
@@ -87,7 +86,7 @@
   </div>
 
   <script>
-    const apiURL = "https://www.omdbapi.com/?s=batman&apikey=e1c61238"; // HTTPS FIXED
+    const apiURL = "https://www.omdbapi.com/?s=batman&apikey=e1c61238";
     const redirectLink = "https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa";
 
     async function fetchMovies() {
@@ -101,8 +100,10 @@
           return;
         }
 
-        container.innerHTML = ""; // Kosongkan loading
-        data.Search.forEach(movie => {
+        container.innerHTML = "";
+        const limitedMovies = data.Search.slice(0, 8); // Batasi ke 8 film
+
+        limitedMovies.forEach(movie => {
           const poster = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/180x270?text=No+Image";
           const card = document.createElement("div");
           card.className = "movie-card";
