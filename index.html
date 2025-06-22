@@ -1,297 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAPFLIX - Movie Landing Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.rapedia.biz.id/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RAPFLIX123"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RAPFLIX123');
+  </script>
+  <meta name="theme-color" content="#0e0e0e">
+  <meta name="description" content="RAPFLIX adalah situs pencarian film online dengan tampilan modern, responsif, dan fitur pencarian cepat berdasarkan genre dan judul film.">
+  <meta property="og:title" content="RAPFLIX - Situs Pencarian Film Online">
+  <meta property="og:description" content="RAPFLIX adalah web pencarian film berbasis OMDb API dengan tampilan menarik dan fitur genre, tema, dan pencarian cepat.">
+  <meta property="og:image" content="https://www.rapedia.biz.id/assets/rapflix-preview.png">
+  <meta property="og:url" content="https://www.rapedia.biz.id/rapflix">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RAPFLIX - Situs Pencarian Film Online">
+  <meta name="twitter:description" content="Jelajahi berbagai film dengan genre favoritmu di RAPFLIX.">
+  <meta name="twitter:image" content="https://www.rapedia.biz.id/assets/rapflix-preview.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAPFLIX</title>
   <style>
-    :root {
-      --bg: #0e0e0e;
-      --text: #fff;
-      --primary: #e50914;
-      --card: #1c1c1c;
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
     }
-
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    :root {
+      --bg-color: #0e0e0e;
+      --text-color: #fff;
+      --card-color: #1c1c1c;
+      --button-color: #e50914;
+      --footer-color: #111;
+    }
+    body.light-theme {
+      --bg-color: #f4f4f4;
+      --text-color: #000;
+      --card-color: #fff;
+      --button-color: #d00000;
+      --footer-color: #ddd;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
-
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
-      background: #141414;
+      padding: 10px 20px;
+      background-color: var(--footer-color);
     }
-
     .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      color: var(--primary);
-      text-shadow: 0 0 8px rgba(229,9,20,0.6);
+      font-size: 24px;
+      color: var(--button-color);
+      font-weight: bold;
     }
-
-    .buttons a, .theme-toggle {
-      background: #333;
+    .buttons a {
       color: white;
-      padding: 8px 14px;
-      margin-left: 10px;
+      background-color: var(--button-color);
+      padding: 6px 12px;
+      border-radius: 4px;
       text-decoration: none;
-      border-radius: 5px;
-      transition: 0.3s;
+      margin-left: 10px;
     }
-    .theme-toggle:hover, .buttons a:hover {
-      background: var(--primary);
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #1a1a1a;
-      padding: 10px;
-    }
-    nav button {
-      background: transparent;
-      color: var(--text);
-      border: none;
-      margin: 0 10px;
-      font-size: 16px;
+    .theme-toggle {
+      background-color: transparent;
+      border: 2px solid var(--button-color);
+      color: var(--button-color);
+      padding: 5px 10px;
+      border-radius: 20px;
       cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
     }
-
+    .theme-toggle:hover {
+      background-color: var(--button-color);
+      color: #fff;
+      transform: scale(1.05);
+    }
     .search {
       text-align: center;
-      margin: 20px;
+      padding: 20px;
     }
-    .search input, .search select {
+    .search input {
       padding: 10px;
-      margin: 5px;
-      width: auto;
-      max-width: 300px;
-      border-radius: 5px;
+      border-radius: 4px;
       border: none;
+      width: 80%;
+      max-width: 400px;
     }
-
+    .genres {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .genres button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .genres button:hover {
+      background-color: var(--button-color);
+    }
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 20px;
       padding: 20px;
     }
-
     .card {
-      background: var(--card);
-      border-radius: 10px;
-      overflow: hidden;
+      background-color: var(--card-color);
+      border-radius: 8px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      height: 320px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      animation: cardEnter 0.6s ease both;
+    }
+    .card:hover {
+      transform: translateY(-5px);
     }
     .card img {
       width: 100%;
-      height: 180px;
+      height: 240px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 4px;
     }
     .card .title {
-      margin-top: 10px;
-      font-weight: bold;
-      text-align: center;
       font-size: 14px;
+      margin: 10px 0 4px;
+      min-height: 36px;
     }
     .card .year {
       font-size: 12px;
       color: #aaa;
     }
-    .card a {
+    .card .button-container {
       margin-top: auto;
-      background: var(--primary);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 13px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
+    .card a {
+      padding: 6px 14px;
+      font-size: 14px;
+      border-radius: 4px;
+      background-color: var(--button-color);
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 12px;
+    }
+    .card a:hover {
+      background-color: #ff2e2e;
+      transform: scale(1.05);
+    }
     footer {
-      background: #111;
       text-align: center;
       padding: 15px;
+      background-color: var(--footer-color);
+      color: #aaa;
       font-size: 14px;
-      margin-top: auto;
-      color: #888;
-    }
-
-    @media(max-width:600px) {
-      .logo {
-        font-size: 20px;
-      }
-      .buttons a, .theme-toggle {
-        padding: 6px 10px;
-        font-size: 12px;
-      }
-      .card {
-        height: auto;
-      }
-      .card img {
-        height: 160px;
-      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">RAPFLIX</div>
+    <h1 class="logo">RAPFLIX</h1>
     <div class="buttons">
-      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank">Daftar</a>
-      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank">Masuk</a>
-      <button class="theme-toggle" onclick="toggleTheme()">🌗 Tema</button>
+      <button class="theme-toggle" onclick="toggleTheme()">Ganti Tema</button>
+      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa">Masuk</a>
+      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa">Daftar</a>
     </div>
   </header>
 
-  <nav>
-    <button onclick="fetchMovies('batman')">Batman</button>
-    <button onclick="fetchMovies('superman')">Superman</button>
-    <button onclick="fetchMovies('spiderman')">Spiderman</button>
-  </nav>
-
   <div class="search">
-    <input type="text" id="searchInput" placeholder="Cari film..." oninput="debouncedSearch()" />
-    <select id="filterYear" onchange="applyFilters()">
-      <option value="">Semua Tahun</option>
-    </select>
-    <select id="sortTitle" onchange="applyFilters()">
-      <option value="">Urutkan Judul</option>
-      <option value="asc">A - Z</option>
-      <option value="desc">Z - A</option>
-    </select>
-    <select id="filterType" onchange="applyFilters()">
-      <option value="">Semua Tipe</option>
-      <option value="movie">Movie</option>
-      <option value="series">Series</option>
-    </select>
-    <select id="filterRating" onchange="applyFilters()">
-      <option value="">Semua Rating</option>
-      <option value=">=8">IMDb ≥ 8</option>
-      <option value=">=7">IMDb ≥ 7</option>
-      <option value=">=6">IMDb ≥ 6</option>
-    </select>
+    <input type="text" id="searchInput" placeholder="Cari film..." oninput="debouncedSearch()">
   </div>
 
-  <div class="container" id="movies"></div>
+  <nav class="genres">
+    <button onclick="fetchMovies('action')">Action</button>
+    <button onclick="fetchMovies('comedy')">Comedy</button>
+    <button onclick="fetchMovies('drama')">Drama</button>
+    <button onclick="fetchMovies('horror')">Horror</button>
+    <button onclick="fetchMovies('animation')">Animation</button>
+    <button onclick="fetchMovies('romance')">Romance</button>
+    <button onclick="fetchMovies('sci-fi')">Sci-Fi</button>
+    <button onclick="fetchMovies('thriller')">Thriller</button>
+    <button onclick="fetchMovies('fantasy')">Fantasy</button>
+  </nav>
+  <main>
+  <div id="movies" class="container"></div>
+  </main>
+
+  <section style="padding: 30px; text-align: center; max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 1.6; color: var(--text-color);">
+    <h2 style="color: var(--button-color); font-size: 24px; margin-bottom: 10px;">Tentang RAPFLIX</h2>
+    <p>
+      RAPFLIX adalah web pencarian film yang memanfaatkan API OMDb untuk menampilkan berbagai informasi film populer dari berbagai genre. Dengan fitur pencarian dinamis dan tampilan tema yang bisa disesuaikan, RAPFLIX dirancang untuk memberikan pengalaman penelusuran film yang cepat dan sederhana.
+    </p>
+    <p>
+      Platform ini memungkinkan pengguna untuk menjelajahi film berdasarkan genre, tahun rilis, serta melihat poster dan detail singkat film yang tersedia.
+    </p>
+  </section>
 
   <footer>
     &copy; 2025 RAPFLIX. All rights reserved.
   </footer>
 
   <script>
-    const container = document.getElementById("movies");
-    const redirectLink = "https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa";
-    let allResults = [];
-    let filteredResults = [];
-    let ratingMap = {};
-    let timeout;
+    const movieContainer = document.getElementById('movies');
+    const apiKey = 'e1c61238';
 
-    async function fetchMovies(query = "batman") {
-      container.innerHTML = "<p style='text-align:center;width:100%'>Memuat film...</p>";
-      allResults = [];
-      ratingMap = {};
-      let page = 1;
-      const maxPages = 10;
-
-      while (page <= maxPages) {
-        const res = await fetch(`https://www.omdbapi.com/?s=${query}&page=${page}&apikey=e1c61238`);
-        const data = await res.json();
-        if (data.Response === "False" || !data.Search) break;
-
-        allResults = allResults.concat(data.Search);
-        for (const film of data.Search) {
-          const detail = await fetch(`https://www.omdbapi.com/?i=${film.imdbID}&apikey=e1c61238`).then(r => r.json());
-          ratingMap[film.imdbID] = parseFloat(detail.imdbRating) || 0;
-        }
-
-        if (allResults.length >= 100) break;
-        page++;
-      }
-
-      if (allResults.length === 0) {
-        container.innerHTML = "<p style='text-align:center;width:100%'>Film tidak ditemukan.</p>";
-        return;
-      }
-
-      filteredResults = [...allResults];
-      applyFilters();
+    function fetchMovies(query) {
+      fetch(`https://www.omdbapi.com/?s=${query}&apikey=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.Search) {
+            const columnCount = Math.floor(movieContainer.offsetWidth / 180);
+            const movieCount = columnCount * Math.floor(data.Search.length / columnCount);
+            movieContainer.innerHTML = renderMovies(data.Search.slice(0, movieCount));
+          } else {
+            movieContainer.innerHTML = '<p style="text-align:center;width:100%">Film tidak ditemukan.</p>';
+          }
+        });
     }
 
+    let timeout;
     function debouncedSearch() {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        const val = document.getElementById("searchInput").value.trim();
-        fetchMovies(val || "batman");
+        const query = document.getElementById('searchInput').value.trim();
+        if (query) fetchMovies(query);
       }, 500);
     }
 
-    function toggleTheme() {
-      document.body.classList.toggle("light-theme");
-    }
-
-    function applyFilters() {
-      const year = document.getElementById("filterYear").value;
-      const sort = document.getElementById("sortTitle").value;
-      const type = document.getElementById("filterType").value;
-      const ratingFilter = document.getElementById("filterRating").value;
-
-      let results = [...allResults];
-
-      if (year) {
-        results = results.filter(f => f.Year === year);
-      }
-
-      if (type) {
-        results = results.filter(f => f.Type === type);
-      }
-
-      if (ratingFilter) {
-        const threshold = parseFloat(ratingFilter.replace('>=', ''));
-        results = results.filter(f => ratingMap[f.imdbID] >= threshold);
-      }
-
-      if (sort === "asc") {
-        results.sort((a, b) => a.Title.localeCompare(b.Title));
-      } else if (sort === "desc") {
-        results.sort((a, b) => b.Title.localeCompare(a.Title));
-      }
-
-      container.innerHTML = "";
-
-      results.forEach(film => {
-        const poster = film.Poster !== "N/A" ? film.Poster : "https://via.placeholder.com/180x270?text=No+Image";
-        container.innerHTML += `
+    function renderMovies(movies) {
+      return movies.map(m => {
+        return `
           <div class="card">
-            <img src="${poster}" alt="${film.Title}" />
-            <div class="title">${film.Title}</div>
-            <div class="year">${film.Year}</div>
-            <a href="${redirectLink}" target="_blank">Play</a>
+            <img src="${m.Poster !== 'N/A' ? m.Poster : 'https://via.placeholder.com/160x240'}" alt="${m.Title}" />
+            <div class="title">${m.Title}</div>
+            <div class="year">${m.Year}</div>
+            <div class="button-container">
+              <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank">Play</a>
+            </div>
           </div>
         `;
-      });
-
-      const yearSelect = document.getElementById("filterYear");
-      const uniqueYears = [...new Set(allResults.map(f => f.Year))].sort();
-      yearSelect.innerHTML = '<option value="">Semua Tahun</option>' + uniqueYears.map(y => `<option value="${y}">${y}</option>`).join("");
+      }).join('');
     }
 
-    fetchMovies();
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+    }
+
+    fetchMovies('batman');
   </script>
 </body>
 </html>
