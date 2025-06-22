@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Threat Map - Rapedia</title>
+  <style>
+    :root {
+      --bg-color: #0d0d0d;
+      --text-color: #ffffff;
+      --link-color: #00ffff;
+      --footer-bg: #111;
+      --box-shadow: rgba(0, 255, 255, 0.3);
+    }
+
+    body.light {
+      --bg-color: #f4f4f4;
+      --text-color: #111;
+      --link-color: #007acc;
+      --footer-bg: #ddd;
+      --box-shadow: rgba(0, 122, 204, 0.3);
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: var(--footer-bg);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--link-color);
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--link-color);
+    }
+
+    .toggle-btn {
+      background-color: transparent;
+      border: 1px solid var(--link-color);
+      color: var(--link-color);
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-left: 20px;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 10px;
+      min-height: calc(100vh - 160px);
+    }
+
+    iframe {
+      border: none;
+      max-width: 100%;
+      box-shadow: 0 0 20px var(--box-shadow);
+    }
+
+    footer {
+      background-color: var(--footer-bg);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid #222;
+    }
+
+    @media (max-width: 960px) {
+      iframe {
+        width: 100%;
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cyber Threat Map</h1>
+    <nav>
+      <button class="toggle-btn" onclick="toggleTheme()">🌗 Ganti Tema</button>
+    </nav>
+  </header>
+
+  <main>
+    <iframe
+      width="900"
+      height="744"
+      src="https://cybermap.kaspersky.com/en/widget/dynamic/dark"
+      frameborder="0">
+    </iframe>
+  </main>
+
+  <footer>
+    &copy; 2025 <strong>rapedia</strong>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+  </script>
+</body>
+</html>
