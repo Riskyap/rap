@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Batman Movies</title>
+  <title>RAPFLIX</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,13 +11,36 @@
       color: #fff;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     header {
       background: #1e1e1e;
       padding: 20px;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-title {
       font-size: 24px;
       font-weight: bold;
+    }
+    .auth-buttons a {
+      margin-left: 10px;
+      padding: 8px 15px;
+      background: #444;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .auth-buttons a:hover {
+      background: #666;
     }
     .movies-container {
       display: flex;
@@ -25,6 +48,7 @@
       justify-content: center;
       gap: 15px;
       padding: 20px;
+      flex-grow: 1;
     }
     .movie-card {
       background: #2c2c2c;
@@ -71,6 +95,13 @@
       margin: 10px auto;
       text-align: center;
     }
+    footer {
+      background: #1a1a1a;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #888;
+    }
   </style>
 </head>
 <body>
@@ -79,11 +110,21 @@
     <script type="text/javascript" src="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa"></script>
   </div>
 
-  <header>Batman Movie Collection</header>
+  <header>
+    <div class="logo-title">Batman Movie Collection</div>
+    <div class="auth-buttons">
+      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank" rel="noopener noreferrer">Daftar</a>
+      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank" rel="noopener noreferrer">Masuk</a>
+    </div>
+  </header>
 
   <div class="movies-container" id="movies-container">
     <p>Memuat data film...</p>
   </div>
+
+  <footer>
+    &copy; 2025 RAPFLIX. All rights reserved.
+  </footer>
 
   <script>
     const apiURL = "https://www.omdbapi.com/?s=batman&apikey=e1c61238";
@@ -101,7 +142,7 @@
         }
 
         container.innerHTML = "";
-        const limitedMovies = data.Search.slice(0, 8); // Batasi ke 8 film
+        const limitedMovies = data.Search.slice(0, 8);
 
         limitedMovies.forEach(movie => {
           const poster = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/180x270?text=No+Image";
