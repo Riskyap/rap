@@ -3,222 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Batman Movies - RAPFLIX</title>
+  <title>RAPFLIX - Movie Landing Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #0e0e0e;
-      --card-color: #2c2c2c;
-      --text-color: #fff;
-      --subtext-color: #bbb;
-      --button-bg: #e50914;
-      --button-hover: #ff1f1f;
-      --header-bg: #1e1e1e;
-      --footer-bg: #1a1a1a;
-    }
-
-    body.light-theme {
-      --bg-color: #f4f4f4;
-      --card-color: #fff;
-      --text-color: #000;
-      --subtext-color: #444;
-      --button-bg: #d00000;
-      --button-hover: #ff4040;
-      --header-bg: #ffffff;
-      --footer-bg: #eeeeee;
+      --bg: #0e0e0e;
+      --text: #fff;
+      --primary: #e50914;
+      --card: #1c1c1c;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      transition: background 0.3s, color 0.3s;
     }
 
     header {
-      background: var(--header-bg);
-      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      padding: 15px 20px;
+      background: #141414;
     }
 
-    .logo-area {
-      display: flex;
-      align-items: center;
+    .logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 28px;
-      color: red;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-      animation: glow 1.5s ease-in-out infinite alternate;
+      color: var(--primary);
+      text-shadow: 0 0 8px rgba(229,9,20,0.6);
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 5px red; }
-      to { text-shadow: 0 0 15px red; }
-    }
-
-    .auth-buttons a,
-    #themeToggle {
-      margin-left: 10px;
-      padding: 8px 15px;
-      background: #444;
+    .buttons a, .theme-toggle {
+      background: #333;
       color: white;
-      border-radius: 5px;
+      padding: 8px 14px;
+      margin-left: 10px;
       text-decoration: none;
-      font-size: 14px;
-      transition: background 0.3s;
-      border: none;
-      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s;
     }
-
-    .auth-buttons a:hover,
-    #themeToggle:hover {
-      background: #666;
+    .theme-toggle:hover, .buttons a:hover {
+      background: var(--primary);
     }
 
     nav {
-      background: var(--header-bg);
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      background: #1a1a1a;
       padding: 10px;
     }
-
     nav button {
       background: transparent;
+      color: var(--text);
       border: none;
-      color: var(--text-color);
       margin: 0 10px;
       font-size: 16px;
       cursor: pointer;
-      transition: color 0.3s;
     }
 
-    nav button:hover {
-      color: var(--button-bg);
-    }
-
-    .search-bar {
-      padding: 20px;
+    .search {
       text-align: center;
-      background: var(--header-bg);
+      margin: 20px;
     }
-
-    .search-bar input {
-      width: 300px;
-      max-width: 90%;
+    .search input {
       padding: 10px;
-      font-size: 16px;
-      border: none;
+      width: 80%;
+      max-width: 400px;
       border-radius: 5px;
+      border: none;
     }
 
-    .movies-container {
+    .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
-      padding: 30px;
-      flex-grow: 1;
+      padding: 20px;
     }
 
-    .movie-card {
-      background: var(--card-color);
+    .card {
+      background: var(--card);
       border-radius: 10px;
-      text-align: center;
-      padding: 15px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
-      min-height: 430px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 0.6s ease-in-out;
+      align-items: center;
+      padding: 10px;
+      height: 320px;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .movie-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-    }
-
-    .movie-card img {
+    .card img {
       width: 100%;
-      height: 270px;
+      height: 180px;
       object-fit: cover;
       border-radius: 6px;
-      margin-bottom: 10px;
     }
-
-    .movie-title {
-      font-size: 15px;
+    .card .title {
+      margin-top: 10px;
       font-weight: bold;
-      margin-bottom: 5px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    .movie-year {
-      color: var(--subtext-color);
-      font-size: 13px;
-      margin-bottom: auto;
-    }
-
-    .play-button {
-      margin-top: 15px;
-      display: inline-block;
-      padding: 8px 15px;
-      background: var(--button-bg);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 14px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .play-button:hover {
-      background: var(--button-hover);
-    }
-
-    .ads {
-      margin: 10px auto;
       text-align: center;
+      font-size: 14px;
+    }
+    .card .year {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .card a {
+      margin-top: auto;
+      background: var(--primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 13px;
     }
 
     footer {
-      background: var(--footer-bg);
+      background: #111;
       text-align: center;
       padding: 15px;
       font-size: 14px;
-      color: var(--subtext-color);
+      margin-top: auto;
+      color: #888;
+    }
+
+    @media(max-width:600px) {
+      .logo {
+        font-size: 20px;
+      }
+      .buttons a, .theme-toggle {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      .card {
+        height: auto;
+      }
+      .card img {
+        height: 160px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="ads">
-    <script type="text/javascript" src="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa"></script>
-  </div>
-
   <header>
-    <div class="logo-area">RAPFLIX</div>
-    <div class="auth-buttons">
+    <div class="logo">RAPFLIX</div>
+    <div class="buttons">
       <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank">Daftar</a>
       <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank">Masuk</a>
-      <button id="themeToggle">Ganti Tema</button>
+      <button class="theme-toggle" onclick="toggleTheme()">🌗 Tema</button>
     </div>
   </header>
 
@@ -228,65 +164,64 @@
     <button onclick="fetchMovies('spiderman')">Spiderman</button>
   </nav>
 
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Cari judul film...">
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Cari film..." oninput="debouncedSearch()" />
   </div>
 
-  <div class="movies-container" id="movies-container">
-    <p>Memuat data film...</p>
-  </div>
+  <div class="container" id="movies"></div>
 
   <footer>
     &copy; 2025 RAPFLIX. All rights reserved.
   </footer>
 
   <script>
+    const container = document.getElementById("movies");
     const redirectLink = "https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa";
-    const searchInput = document.getElementById("searchInput");
 
     async function fetchMovies(query = "batman") {
-      const container = document.getElementById("movies-container");
-      container.innerHTML = "<p>Memuat data film...</p>";
-      try {
-        const response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=e1c61238`);
-        const data = await response.json();
+  container.innerHTML = "<p style='text-align:center;width:100%'>Memuat film...</p>";
 
-        if (!data.Search) {
-          container.innerHTML = "<p>Film tidak ditemukan.</p>";
-          return;
-        }
+  const [res1, res2] = await Promise.all([
+    fetch(`https://www.omdbapi.com/?s=${query}&page=1&apikey=e1c61238`),
+    fetch(`https://www.omdbapi.com/?s=${query}&page=2&apikey=e1c61238`)
+  ]);
 
-        container.innerHTML = "";
-        const limitedMovies = data.Search.slice(0, 8);
+  const data1 = await res1.json();
+  const data2 = await res2.json();
 
-        limitedMovies.forEach(movie => {
-          const poster = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/180x270?text=No+Image";
-          const card = document.createElement("div");
-          card.className = "movie-card";
-          card.innerHTML = `
-            <img src="${poster}" alt="${movie.Title}">
-            <div class="movie-title">${movie.Title}</div>
-            <div class="movie-year">${movie.Year}</div>
-            <a href="${redirectLink}" class="play-button" target="_blank">Play</a>
-          `;
-          container.appendChild(card);
-        });
-      } catch (error) {
-        console.error("Error fetching movies:", error);
-        container.innerHTML = "<p>Gagal memuat data film.</p>";
-      }
+  const allResults = [...(data1.Search || []), ...(data2.Search || [])].slice(0, 14);
+
+  if (allResults.length === 0) {
+    container.innerHTML = "<p style='text-align:center;width:100%'>Film tidak ditemukan.</p>";
+    return;
+  }
+
+  container.innerHTML = "";
+      allResults.forEach(film => {
+        const poster = film.Poster !== "N/A" ? film.Poster : "https://via.placeholder.com/180x270?text=No+Image";
+        container.innerHTML += `
+          <div class="card">
+            <img src="${poster}" alt="${film.Title}" />
+            <div class="title">${film.Title}</div>
+            <div class="year">${film.Year}</div>
+            <a href="${redirectLink}" target="_blank">Play</a>
+          </div>
+        `;
+      });
     }
 
-    document.getElementById("themeToggle").addEventListener("click", () => {
+    function toggleTheme() {
       document.body.classList.toggle("light-theme");
-    });
+    }
 
-    searchInput.addEventListener("input", () => {
-      const query = searchInput.value.trim();
-      if (query.length >= 3 || query.length === 0) {
-        fetchMovies(query || "batman");
-      }
-    });
+    let timeout;
+    function debouncedSearch() {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const val = document.getElementById("searchInput").value.trim();
+        fetchMovies(val || "batman");
+      }, 500);
+    }
 
     fetchMovies();
   </script>
