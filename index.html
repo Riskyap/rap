@@ -70,10 +70,11 @@
       text-align: center;
       margin: 20px;
     }
-    .search input {
+    .search input, .search select {
       padding: 10px;
-      width: 80%;
-      max-width: 400px;
+      margin: 5px;
+      width: auto;
+      max-width: 300px;
       border-radius: 5px;
       border: none;
     }
@@ -166,6 +167,25 @@
 
   <div class="search">
     <input type="text" id="searchInput" placeholder="Cari film..." oninput="debouncedSearch()" />
+    <select id="filterYear" onchange="applyFilters()">
+      <option value="">Semua Tahun</option>
+    </select>
+    <select id="sortTitle" onchange="applyFilters()">
+      <option value="">Urutkan Judul</option>
+      <option value="asc">A - Z</option>
+      <option value="desc">Z - A</option>
+    </select>
+    <select id="filterType" onchange="applyFilters()">
+      <option value="">Semua Tipe</option>
+      <option value="movie">Movie</option>
+      <option value="series">Series</option>
+    </select>
+    <select id="filterRating" onchange="applyFilters()">
+      <option value="">Semua Rating</option>
+      <option value=">=8">IMDb ≥ 8</option>
+      <option value=">=7">IMDb ≥ 7</option>
+      <option value=">=6">IMDb ≥ 6</option>
+    </select>
   </div>
 
   <div class="container" id="movies"></div>
@@ -177,27 +197,84 @@
   <script>
     const container = document.getElementById("movies");
     const redirectLink = "https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa";
+    let allResults = [];
+    let filteredResults = [];
+    let ratingMap = {};
+    let timeout;
 
     async function fetchMovies(query = "batman") {
-  container.innerHTML = "<p style='text-align:center;width:100%'>Memuat film...</p>";
+      container.innerHTML = "<p style='text-align:center;width:100%'>Memuat film...</p>";
+      allResults = [];
+      ratingMap = {};
+      let page = 1;
+      const maxPages = 10;
 
-  const [res1, res2] = await Promise.all([
-    fetch(`https://www.omdbapi.com/?s=${query}&page=1&apikey=e1c61238`),
-    fetch(`https://www.omdbapi.com/?s=${query}&page=2&apikey=e1c61238`)
-  ]);
+      while (page <= maxPages) {
+        const res = await fetch(`https://www.omdbapi.com/?s=${query}&page=${page}&apikey=e1c61238`);
+        const data = await res.json();
+        if (data.Response === "False" || !data.Search) break;
 
-  const data1 = await res1.json();
-  const data2 = await res2.json();
+        allResults = allResults.concat(data.Search);
+        for (const film of data.Search) {
+          const detail = await fetch(`https://www.omdbapi.com/?i=${film.imdbID}&apikey=e1c61238`).then(r => r.json());
+          ratingMap[film.imdbID] = parseFloat(detail.imdbRating) || 0;
+        }
 
-  const allResults = [...(data1.Search || []), ...(data2.Search || [])].slice(0, 14);
+        if (allResults.length >= 100) break;
+        page++;
+      }
 
-  if (allResults.length === 0) {
-    container.innerHTML = "<p style='text-align:center;width:100%'>Film tidak ditemukan.</p>";
-    return;
-  }
+      if (allResults.length === 0) {
+        container.innerHTML = "<p style='text-align:center;width:100%'>Film tidak ditemukan.</p>";
+        return;
+      }
 
-  container.innerHTML = "";
-      allResults.forEach(film => {
+      filteredResults = [...allResults];
+      applyFilters();
+    }
+
+    function debouncedSearch() {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const val = document.getElementById("searchInput").value.trim();
+        fetchMovies(val || "batman");
+      }, 500);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-theme");
+    }
+
+    function applyFilters() {
+      const year = document.getElementById("filterYear").value;
+      const sort = document.getElementById("sortTitle").value;
+      const type = document.getElementById("filterType").value;
+      const ratingFilter = document.getElementById("filterRating").value;
+
+      let results = [...allResults];
+
+      if (year) {
+        results = results.filter(f => f.Year === year);
+      }
+
+      if (type) {
+        results = results.filter(f => f.Type === type);
+      }
+
+      if (ratingFilter) {
+        const threshold = parseFloat(ratingFilter.replace('>=', ''));
+        results = results.filter(f => ratingMap[f.imdbID] >= threshold);
+      }
+
+      if (sort === "asc") {
+        results.sort((a, b) => a.Title.localeCompare(b.Title));
+      } else if (sort === "desc") {
+        results.sort((a, b) => b.Title.localeCompare(a.Title));
+      }
+
+      container.innerHTML = "";
+
+      results.forEach(film => {
         const poster = film.Poster !== "N/A" ? film.Poster : "https://via.placeholder.com/180x270?text=No+Image";
         container.innerHTML += `
           <div class="card">
@@ -208,19 +285,10 @@
           </div>
         `;
       });
-    }
 
-    function toggleTheme() {
-      document.body.classList.toggle("light-theme");
-    }
-
-    let timeout;
-    function debouncedSearch() {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const val = document.getElementById("searchInput").value.trim();
-        fetchMovies(val || "batman");
-      }, 500);
+      const yearSelect = document.getElementById("filterYear");
+      const uniqueYears = [...new Set(allResults.map(f => f.Year))].sort();
+      yearSelect.innerHTML = '<option value="">Semua Tahun</option>' + uniqueYears.map(y => `<option value="${y}">${y}</option>`).join("");
     }
 
     fetchMovies();
