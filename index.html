@@ -1,43 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="https://www.rapedia.biz.id/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAPFLIX</title>
+  <link rel="icon" href="https://www.rapedia.biz.id/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RAPFLIX123"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-RAPFLIX123');
   </script>
-  <meta name="theme-color" content="#0e0e0e">
-  <meta name="description" content="RAPFLIX adalah situs pencarian film online dengan tampilan modern, responsif, dan fitur pencarian cepat berdasarkan genre dan judul film.">
-  <meta property="og:title" content="RAPFLIX - Situs Pencarian Film Online">
-  <meta property="og:description" content="RAPFLIX adalah web pencarian film berbasis OMDb API dengan tampilan menarik dan fitur genre, tema, dan pencarian cepat.">
-  <meta property="og:image" content="https://www.rapedia.biz.id/assets/rapflix-preview.png">
-  <meta property="og:url" content="https://www.rapedia.biz.id/rapflix">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="RAPFLIX - Situs Pencarian Film Online">
-  <meta name="twitter:description" content="Jelajahi berbagai film dengan genre favoritmu di RAPFLIX.">
-  <meta name="twitter:image" content="https://www.rapedia.biz.id/assets/rapflix-preview.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAPFLIX</title>
+
+  <!-- Meta -->
+  <meta name="theme-color" content="#0e0e0e" />
+  <meta name="description" content="RAPFLIX adalah situs pencarian film online modern dan responsif." />
+  <meta property="og:title" content="RAPFLIX - Situs Pencarian Film Online" />
+  <meta property="og:description" content="Cari film favoritmu di RAPFLIX dengan tampilan menarik dan pencarian cepat." />
+  <meta property="og:image" content="https://www.rapedia.biz.id/assets/rapflix-preview.png" />
+  <meta property="og:url" content="https://www.rapedia.biz.id/rapflix" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <style>
-    body {
-      font-family: 'Poppins', Arial, sans-serif;
-      opacity: 0;
-      animation: fadeIn 1s ease-in-out forwards;
-      margin: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
-    }
-    @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-    @keyframes cardEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     :root {
       --bg-color: #0e0e0e;
       --text-color: #fff;
@@ -45,6 +35,7 @@
       --button-color: #e50914;
       --footer-color: #111;
     }
+
     body.light-theme {
       --bg-color: #f4f4f4;
       --text-color: #000;
@@ -52,45 +43,108 @@
       --button-color: #d00000;
       --footer-color: #ddd;
     }
-    header {
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Header */
+    .responsive-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      flex-wrap: wrap;
+      padding: 12px 20px;
       background-color: var(--footer-color);
+      gap: 10px;
     }
-    .logo {
+
+    .header-left .logo {
       font-size: 24px;
-      color: var(--button-color);
       font-weight: bold;
+      color: var(--button-color);
+      margin: 0;
     }
-    .buttons a {
-      color: white;
+
+    .header-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-header {
       background-color: var(--button-color);
-      padding: 6px 12px;
+      color: white;
+      padding: 6px 16px;
       border-radius: 4px;
       text-decoration: none;
-      margin-left: 10px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
     }
+
+    .btn-header:hover {
+      background-color: #ff2e2e;
+    }
+
     .theme-toggle {
-      background-color: transparent;
+      background: transparent;
       border: 2px solid var(--button-color);
       color: var(--button-color);
-      padding: 5px 10px;
+      padding: 6px 16px;
       border-radius: 20px;
       cursor: pointer;
       font-weight: bold;
       transition: all 0.3s ease-in-out;
     }
+
     .theme-toggle:hover {
       background-color: var(--button-color);
       color: #fff;
       transform: scale(1.05);
     }
+
+    /* Mobile Adjustments */
+    @media (max-width: 600px) {
+      .responsive-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-right {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .btn-header,
+      .theme-toggle {
+        width: auto;
+        min-width: 120px;
+        align-self: center;
+      }
+
+      .header-left .logo {
+        font-size: 20px;
+      }
+    }
+
+    /* Search & Genre */
     .search {
       text-align: center;
       padding: 20px;
     }
+
     .search input {
       padding: 10px;
       border-radius: 4px;
@@ -98,103 +152,111 @@
       width: 80%;
       max-width: 400px;
     }
+
     .genres {
       display: flex;
       justify-content: center;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
       margin-bottom: 20px;
     }
+
     .genres button {
       background-color: #333;
-      color: #fff;
+      color: white;
       border: none;
       padding: 6px 12px;
       border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
+
     .genres button:hover {
       background-color: var(--button-color);
     }
+
+    /* Movie Grid */
     .container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 20px;
       padding: 20px;
     }
+
     .card {
       background-color: var(--card-color);
       border-radius: 8px;
       padding: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       text-align: center;
       transition: transform 0.3s ease;
-      animation: cardEnter 0.6s ease both;
     }
+
     .card:hover {
       transform: translateY(-5px);
     }
+
     .card img {
       width: 100%;
       height: 240px;
       object-fit: cover;
       border-radius: 4px;
     }
+
     .card .title {
       font-size: 14px;
       margin: 10px 0 4px;
       min-height: 36px;
     }
+
     .card .year {
       font-size: 12px;
       color: #aaa;
     }
-    .card .button-container {
-      margin-top: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+
     .card a {
+      margin-top: auto;
       padding: 6px 14px;
-      font-size: 14px;
-      border-radius: 4px;
       background-color: var(--button-color);
       color: white;
+      border-radius: 4px;
       text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      margin-top: 12px;
+      display: inline-block;
+      transition: 0.3s;
     }
+
     .card a:hover {
       background-color: #ff2e2e;
       transform: scale(1.05);
     }
+
     footer {
-      text-align: center;
-      padding: 15px;
       background-color: var(--footer-color);
       color: #aaa;
+      text-align: center;
+      padding: 15px;
       font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1 class="logo">RAPFLIX</h1>
-    <div class="buttons">
+
+  <!-- Header -->
+  <header class="responsive-header">
+    <div class="header-left">
+      <h1 class="logo">RAPFLIX</h1>
+    </div>
+    <div class="header-right">
       <button class="theme-toggle" onclick="toggleTheme()">Ganti Tema</button>
-      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa">Masuk</a>
-      <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa">Daftar</a>
     </div>
   </header>
 
+  <!-- Search -->
   <div class="search">
     <input type="text" id="searchInput" placeholder="Cari film..." oninput="debouncedSearch()">
   </div>
 
+  <!-- Genre Buttons -->
   <nav class="genres">
     <button onclick="fetchMovies('action')">Action</button>
     <button onclick="fetchMovies('comedy')">Comedy</button>
@@ -207,21 +269,19 @@
     <button onclick="fetchMovies('fantasy')">Fantasy</button>
   </nav>
 
+  <!-- Movie Grid -->
   <main>
     <div id="movies" class="container"></div>
   </main>
 
+  <!-- Tentang -->
   <section style="padding: 30px; text-align: center; max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 1.6; color: var(--text-color);">
-    <h2 style="color: var(--button-color); font-size: 24px; margin-bottom: 10px;">Tentang RAPFLIX</h2>
-    <p>
-      RAPFLIX adalah web pencarian film yang memanfaatkan API OMDb untuk menampilkan berbagai informasi film populer dari berbagai genre. Dengan fitur pencarian dinamis dan tampilan tema yang bisa disesuaikan, RAPFLIX dirancang untuk memberikan pengalaman penelusuran film yang cepat dan sederhana.
-    </p>
-    <p>
-      Platform ini memungkinkan pengguna untuk menjelajahi film berdasarkan genre, tahun rilis, serta melihat poster dan detail singkat film yang tersedia.
-    </p>
+    <h2 style="color: var(--button-color); font-size: 24px;">Tentang RAPFLIX</h2>
+    <p>RAPFLIX adalah web pencarian film yang memanfaatkan API OMDb untuk menampilkan informasi film populer dari berbagai genre.</p>
+    <p>Platform ini memungkinkan pengguna untuk menjelajahi film berdasarkan genre, tahun rilis, serta melihat poster dan detail singkat film.</p>
   </section>
 
-  <!-- Iklan Banner 728x90 -->
+  <!-- Iklan -->
   <div style="text-align: center; margin: 30px 0;">
     <script type="text/javascript">
       atOptions = {
@@ -235,20 +295,16 @@
     <script type="text/javascript" src="//www.highperformanceformat.com/a5aec52d333b1d9cf4cfb8c6fa52e5ec/invoke.js"></script>
   </div>
 
+  <!-- Footer -->
   <footer>
     &copy; 2025 RAPFLIX. All rights reserved.
   </footer>
 
-  <!-- Social Bar -->
-  <div id="social-bar" style="position: fixed; bottom: 20px; left: 10px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
-    <a href="https://facebook.com/rapedia.biz.id" target="_blank" title="Facebook" style="background:#3b5998; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; text-decoration:none;">F</a>
-    <a href="https://twitter.com/rapedia_id" target="_blank" title="Twitter" style="background:#1da1f2; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; text-decoration:none;">T</a>
   </div>
+<!-- Floating Ad Script -->
+<script type='text/javascript' src='//pl26999741.profitableratecpm.com/36/95/8c/36958c11ae9ccdd30bca8dd6dda2bacb.js'></script>
 
-  <!-- Script Iklan Floating -->
-  <script type='text/javascript' src='//pl26999741.profitableratecpm.com/36/95/8c/36958c11ae9ccdd30bca8dd6dda2bacb.js'></script>
-
-  <!-- Script Utama -->
+  <!-- Script -->
   <script>
     const movieContainer = document.getElementById('movies');
     const apiKey = 'e1c61238';
@@ -258,11 +314,15 @@
         .then(res => res.json())
         .then(data => {
           if (data.Search) {
-            const columnCount = Math.floor(movieContainer.offsetWidth / 180);
-            const movieCount = columnCount * Math.floor(data.Search.length / columnCount);
-            movieContainer.innerHTML = renderMovies(data.Search.slice(0, movieCount));
+            movieContainer.innerHTML = data.Search.map(m => `
+              <div class="card">
+                <img src="${m.Poster !== 'N/A' ? m.Poster : 'https://via.placeholder.com/160x240'}" alt="${m.Title}" />
+                <div class="title">${m.Title}</div>
+                <div class="year">${m.Year}</div>
+                <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank">Play</a>
+              </div>`).join('');
           } else {
-            movieContainer.innerHTML = '<p style="text-align:center;width:100%">Film tidak ditemukan.</p>';
+            movieContainer.innerHTML = '<p style="text-align:center;">Film tidak ditemukan.</p>';
           }
         });
     }
@@ -274,21 +334,6 @@
         const query = document.getElementById('searchInput').value.trim();
         if (query) fetchMovies(query);
       }, 500);
-    }
-
-    function renderMovies(movies) {
-      return movies.map(m => {
-        return `
-          <div class="card">
-            <img src="${m.Poster !== 'N/A' ? m.Poster : 'https://via.placeholder.com/160x240'}" alt="${m.Title}" />
-            <div class="title">${m.Title}</div>
-            <div class="year">${m.Year}</div>
-            <div class="button-container">
-              <a href="https://www.profitableratecpm.com/c0uvx0tw?key=5e7614e8afa2e36e6ea822b0f48e35fa" target="_blank">Play</a>
-            </div>
-          </div>
-        `;
-      }).join('');
     }
 
     function toggleTheme() {
