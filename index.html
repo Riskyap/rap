@@ -31,15 +31,13 @@
       font-family: 'Poppins', Arial, sans-serif;
       opacity: 0;
       animation: fadeIn 1s ease-in-out forwards;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-    @keyframes cardEnter {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes cardEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     :root {
       --bg-color: #0e0e0e;
       --text-color: #fff;
@@ -53,13 +51,6 @@
       --card-color: #fff;
       --button-color: #d00000;
       --footer-color: #ddd;
-    }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
     }
     header {
       display: flex;
@@ -215,8 +206,9 @@
     <button onclick="fetchMovies('thriller')">Thriller</button>
     <button onclick="fetchMovies('fantasy')">Fantasy</button>
   </nav>
+
   <main>
-  <div id="movies" class="container"></div>
+    <div id="movies" class="container"></div>
   </main>
 
   <section style="padding: 30px; text-align: center; max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 1.6; color: var(--text-color);">
@@ -233,6 +225,16 @@
     &copy; 2025 RAPFLIX. All rights reserved.
   </footer>
 
+  <!-- Social Bar -->
+  <div id="social-bar" style="position: fixed; bottom: 20px; left: 10px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+    <a href="https://facebook.com/rapedia.biz.id" target="_blank" title="Facebook" style="background:#3b5998; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; text-decoration:none;">F</a>
+    <a href="https://twitter.com/rapedia_id" target="_blank" title="Twitter" style="background:#1da1f2; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; text-decoration:none;">T</a>
+  </div>
+
+  <!-- Iklan Script -->
+  <script type='text/javascript' src='//pl26999741.profitableratecpm.com/36/95/8c/36958c11ae9ccdd30bca8dd6dda2bacb.js'></script>
+
+  <!-- Script Utama -->
   <script>
     const movieContainer = document.getElementById('movies');
     const apiKey = 'e1c61238';
